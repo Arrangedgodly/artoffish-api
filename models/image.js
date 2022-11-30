@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const validator = require('validator');
 
 const imageSchema = new mongoose.Schema({
   prompt: {
@@ -8,6 +9,12 @@ const imageSchema = new mongoose.Schema({
   link: {
     type: String,
     required: true,
+    validate: {
+      validator(value) {
+        return validator.isURL(value);
+      },
+      message: 'You must enter a valid URL'
+    }
   }
 })
 

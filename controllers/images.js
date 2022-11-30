@@ -1,6 +1,6 @@
 const Image = require('../models/image');
 
-const createImage = (req, res) => {
+module.exports.createImage = (req, res) => {
   const { prompt, link } = req.body;
 
   Image.create({ prompt, link })
@@ -8,10 +8,8 @@ const createImage = (req, res) => {
     .catch(() => res.status(500).send({ message: "there was an error validating your request"}))
 };
 
-const getImages = (req, res) => {
+module.exports.getImages = (req, res) => {
   Image.find({})
     .then(images => res.status(200).send({ images }))
     .catch(() => res.status(500).send({ message: "there was an error validating your request"}))
 }
-
-module.exports = { createImage, getImages };
